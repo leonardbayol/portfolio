@@ -1,6 +1,9 @@
+"use client"; // 🔹 nécessaire pour useRef et useState
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
 const ExperiencesSection = () => {
   const experiences = [
@@ -11,7 +14,6 @@ const ExperiencesSection = () => {
       periode: "févr. 2025 - août 2025",
       type: "Stage",
       lien: "https://www.papernest.com",
-      image: "/papernest.png",
       description:
         "Stage au sein d’une équipe agile sur un produit B2C avec plus de 1M d’utilisateurs. Responsabilités couvrant discovery, delivery et suivi de KPIs.",
       realisations: [
@@ -45,7 +47,6 @@ const ExperiencesSection = () => {
       periode: "mai 2024 - août 2024",
       type: "Stage",
       lien: "https://www.concordia.ca/artsci/psychology/research/deroche.html",
-      image: "/concordia-lab.jpg",
       description:
         "Travail de recherche sur la compréhension des émotions chez les porteurs d’implants cochléaires, de la conception du protocole expérimental jusqu’à l’analyse des données.",
       realisations: [
@@ -64,7 +65,6 @@ const ExperiencesSection = () => {
       periode: "avr. 2023 - mars 2024",
       type: "Mandat associatif",
       lien: "https://www.junior-i2c.com",
-      image: "/i2c-office.jpg",
       description:
         "Responsable qualité de la Junior-Entreprise, garantissant la conformité et la bonne application des processus internes tout en accompagnant les projets clients.",
       realisations: [
@@ -80,7 +80,6 @@ const ExperiencesSection = () => {
       periode: "juin 2023 - juil. 2023",
       type: "CDD",
       lien: "https://www.skillandyou.com/fr",
-      image: "/skillandyou-office.jpg",
       description:
         "Travail au sein du service administratif avec missions variées de gestion et d’optimisation des outils de suivi internes.",
       realisations: [
@@ -110,81 +109,98 @@ const ExperiencesSection = () => {
         </div>
 
         <div className="space-y-8">
-          {experiences.map((experience, index) => (
-            <a
-              key={index}
-              href={experience.lien}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <Card className="hover:shadow-lg transition-shadow duration-300 hover:cursor-pointer">
-                <CardHeader>
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                    <div className="flex-1">
-                      <CardTitle className="text-xl text-foreground mb-2">
-                        {experience.poste}
-                      </CardTitle>
-                      <p className="text-accent font-semibold text-lg">
-                        {experience.entreprise}
-                      </p>
-                      <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-muted-foreground">
-                        <div className="flex items-center">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          {experience.lieu}
+          {experiences.map((experience, index) => {
+            const scrollRef = useRef<HTMLDivElement>(null);
+            const [canScroll, setCanScroll] = useState(false);
+
+            useEffect(() => {
+              if (scrollRef.current) {
+                setCanScroll(
+                  scrollRef.current.scrollWidth > scrollRef.current.clientWidth,
+                );
+              }
+            }, []);
+
+            return (
+              <a
+                key={index}
+                href={experience.lien}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Card className="hover:shadow-lg transition-shadow duration-300 hover:cursor-pointer">
+                  <CardHeader>
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                      <div className="flex-1">
+                        <CardTitle className="text-xl text-foreground mb-2">
+                          {experience.poste}
+                        </CardTitle>
+                        <p className="text-accent font-semibold text-lg">
+                          {experience.entreprise}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-muted-foreground">
+                          <div className="flex items-center">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {experience.lieu}
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {experience.periode}
+                          </div>
+                          <Badge variant="outline">{experience.type}</Badge>
                         </div>
-                        <div className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {experience.periode}
-                        </div>
-                        <Badge variant="outline">{experience.type}</Badge>
                       </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4 text-pretty">
-                    {experience.description}
-                  </p>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4 text-pretty">
+                      {experience.description}
+                    </p>
 
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-foreground mb-2">
-                      Réalisations clés :
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      {experience.realisations.map((realisation, idx) => (
-                        <li key={idx}>{realisation}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      Compétences mobilisées :
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech, idx) => (
-                        <Badge key={idx} variant="secondary">
-                          {tech}
-                        </Badge>
-                      ))}
+                    <div className="mb-4">
+                      <h4 className="font-semibold text-foreground mb-2">
+                        Réalisations clés :
+                      </h4>
+                      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                        {experience.realisations.map((realisation, idx) => (
+                          <li key={idx}>{realisation}</li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
 
-                  {/* Image en bas */}
-                  {experience.image && (
-                    <div className="mt-6">
-                      <img
-                        src={experience.image}
-                        alt={experience.entreprise}
-                        className="w-full h-48 object-cover rounded-lg border"
-                      />
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-2">
+                        Compétences mobilisées :
+                      </h4>
+
+                      <div className="relative">
+                        {canScroll && (
+                          <>
+                            {/* Dégradé droit */}
+                            <div className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-background to-transparent z-10" />
+                          </>
+                        )}
+
+                        <div
+                          ref={scrollRef}
+                          className="overflow-x-auto scrollbar-hide"
+                        >
+                          <div className="flex gap-2 pb-2 min-w-max">
+                            {experience.technologies.map((tech, idx) => (
+                              <Badge key={idx} variant="outline">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            </a>
-          ))}
+                  </CardContent>
+                </Card>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

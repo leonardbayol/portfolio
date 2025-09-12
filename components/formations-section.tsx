@@ -1,3 +1,6 @@
+"use client"; // ← nécessaire pour useRef, useState, useEffect
+
+import { useRef, useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Calendar } from "lucide-react";
@@ -67,48 +70,78 @@ const FormationsSection = () => {
         </div>
 
         <div className="space-y-8">
-          {formations.map((formation, index) => (
-            <Card
-              key={index}
-              className="hover:shadow-lg transition-shadow duration-300 hover:cursor-pointer"
-            >
-              <a
-                href={formation.lien}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block h-full"
+          {formations.map((formation, index) => {
+            const scrollRef = useRef<HTMLDivElement>(null);
+            const [canScroll, setCanScroll] = useState(false);
+
+            useEffect(() => {
+              const el = scrollRef.current;
+              if (el) setCanScroll(el.scrollWidth > el.clientWidth);
+            }, [formation.competences]);
+
+            return (
+              <Card
+                key={index}
+                className="hover:shadow-lg transition-shadow duration-300 hover:cursor-pointer"
               >
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl text-foreground">
-                        {formation.titre}
-                      </CardTitle>
-                      <p className="text-accent font-semibold">
-                        {formation.etablissement}
-                      </p>
+                <a
+                  href={formation.lien}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                >
+                  <CardHeader>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div>
+                        <CardTitle className="text-xl text-foreground">
+                          {formation.titre}
+                        </CardTitle>
+                        <p className="text-accent font-semibold">
+                          {formation.etablissement}
+                        </p>
+                      </div>
+                      <div className="flex items-center text-muted-foreground">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span>{formation.periode}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center text-muted-foreground">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      <span>{formation.periode}</span>
+                  </CardHeader>
+
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4 text-pretty">
+                      {formation.description}
+                    </p>
+
+                    <div className="relative">
+                      {/* Dégradés gauche/droite si scroll possible */}
+                      {canScroll && (
+                        <>
+                          <div className="absolute right-0 top-0 h-full w-8 z-20 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+                        </>
+                      )}
+
+                      <div
+                        ref={scrollRef}
+                        className="overflow-x-auto scrollbar-hide relative z-10"
+                      >
+                        <div className="flex gap-2 pb-2 min-w-max">
+                          {formation.competences.map((competence, idx) => (
+                            <Badge
+                              key={idx}
+                              variant="outline"
+                              className="text-xs whitespace-nowrap"
+                            >
+                              {competence}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4 text-pretty">
-                    {formation.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {formation.competences.map((competence, idx) => (
-                      <Badge key={idx} variant="secondary">
-                        {competence}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </a>
-            </Card>
-          ))}
+                  </CardContent>
+                </a>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import { ArrowDown, Github, Linkedin, Mail, PhoneCall } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToNext = () => {
-    const element = document.getElementById("formations");
+    const element = document.getElementById("experiences");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -99,7 +99,7 @@ const HeroSection = () => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
           <Button
             variant="ghost"
             size="icon"
