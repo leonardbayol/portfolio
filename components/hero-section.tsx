@@ -5,7 +5,7 @@ import { ArrowDown, Github, Linkedin, Mail, PhoneCall } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToNext = () => {
-    const element = document.getElementById("experiences");
+    const element = document.getElementById("portfolio");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }

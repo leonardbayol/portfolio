@@ -10,9 +10,9 @@ const Navigation = () => {
 
   const navItems = [
     { id: "accueil", label: "Accueil" },
+    { id: "portfolio", label: "Portfolio" },
     { id: "experiences", label: "Expériences" },
     { id: "formations", label: "Formations" },
-    { id: "portfolio", label: "Portfolio" },
   ];
 
   useEffect(() => {
@@ -29,6 +29,12 @@ const Navigation = () => {
       }
     };
 
+    // Vérifie le hash au chargement
+    const hash = window.location.hash.replace("#", "");
+    if (hash && navItems.some((item) => item.id === hash)) {
+      setActiveSection(hash);
+    }
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -44,7 +50,7 @@ const Navigation = () => {
   // Fonction pour déclencher le téléchargement du CV
   const downloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/CV.pdf"; // chemin vers ton fichier PDF dans /public
+    link.href = "/CV-BAYOL-Leonard.pdf"; // chemin vers ton fichier PDF dans /public
     link.download = "CV_Leonard_BAYOL.pdf"; // nom du fichier téléchargé
     link.click();
   };
