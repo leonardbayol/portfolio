@@ -233,7 +233,7 @@ const projets = [
     gallery: [
       {
         type: "video",
-        src: "/airbus1.mp4",
+        src: "/airbuss1.mp4",
         caption: "Vidéo de présentation du projet",
       },
     ],
