@@ -50,7 +50,7 @@ const Navigation = () => {
   // Fonction pour déclencher le téléchargement du CV
   const downloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/CV-BAYOL-Leonard.pdf"; // chemin vers ton fichier PDF dans /public
+    link.href = "/CV_BAYOL_Leonard.pdf"; // chemin vers ton fichier PDF dans /public
     link.download = "CV_Leonard_BAYOL.pdf"; // nom du fichier téléchargé
     link.click();
   };
