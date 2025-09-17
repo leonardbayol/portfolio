@@ -9,7 +9,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Léonard Bayol - Portfolio",
   description:
-    "Portfolio professionnel de Léonard BAYOL - Product Manager, Owner, Designer",
+    "Portfolio professionnel de Léonard BAYOL - Product Manager, Owner et Designer",
 };
 
 export default function RootLayout({
