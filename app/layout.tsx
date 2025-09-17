@@ -1,22 +1,21 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import { Suspense } from "react"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mon Portfolio - Développeur Full-Stack",
+  title: "Léonard Bayol - Portfolio",
   description:
-    "Portfolio professionnel de [Votre Nom] - Développeur Full-Stack spécialisé en React, Next.js et technologies modernes",
-  generator: "v0.app",
-}
+    "Portfolio professionnel de Léonard BAYOL - Product Manager, Owner, Designer",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
@@ -25,5 +24,5 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
