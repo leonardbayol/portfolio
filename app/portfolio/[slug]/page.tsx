@@ -1,341 +1,346 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { notFound } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import Link from "next/link";
+import { useState } from 'react'
+import { notFound } from 'next/navigation'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import Link from 'next/link'
 
 // ----------------------
 // DATA
 // ----------------------
 const projets = [
   {
-    titre: "Refonte Onboarding",
+    titre: 'Refonte Onboarding',
     description:
       "J'ai repensé le processus d'onboarding sur la plateforme de papernest, afin d'améliorer l'expérience utilisateur et augmenter le taux de conversion.",
-    image: "/refonte-onboarding-design.png",
+    image: '/refonte-onboarding-design.png',
     technologies: [
-      "Product Discovery",
-      "Product Building",
-      "Product Delivery",
-      "Low-Code",
-      "No-Code",
-      "Make",
-      "UX Design",
+      'Product Discovery',
+      'Product Building',
+      'Product Delivery',
+      'Low-Code',
+      'No-Code',
+      'Make',
+      'UX Design',
     ],
-    statut: "Terminé",
-    slug: "refonte-onboarding",
+    statut: 'Terminé',
+    slug: 'refonte-onboarding',
     overview:
-      "Refonte complète du parcours d’onboarding de papernest afin de transformer une expérience incomplète en un processus guidé, engageant et générateur d’actions concrètes.",
+      'Refonte complète du parcours d’onboarding de papernest afin de transformer une expérience incomplète en un processus guidé, engageant et générateur d’actions concrètes.',
     challenge:
-      "L’onboarding initial ne conduisait pas les utilisateurs vers des étapes claires et mesurables. Il fallait à la fois améliorer l’expérience, expliquer la valeur ajoutée du produit et obtenir des conversions tangibles.",
+      'L’onboarding initial ne conduisait pas les utilisateurs vers des étapes claires et mesurables. Il fallait à la fois améliorer l’expérience, expliquer la valeur ajoutée du produit et obtenir des conversions tangibles.',
     solution:
-      "Phase de Product Discovery pour analyser les meilleures pratiques B2C, prototypage de plusieurs parcours avec Figma, échanges et itérations avec l’équipe produit, puis mise en œuvre grâce à des scénarios low-code et no-code (Make). Création et suivi d’un dashboard Looker Studio en autonomie pour mesurer les performances et les conversions.",
+      'Phase de Product Discovery pour analyser les meilleures pratiques B2C, prototypage de plusieurs parcours avec Figma, échanges et itérations avec l’équipe produit, puis mise en œuvre grâce à des scénarios low-code et no-code (Make). Création et suivi d’un dashboard Looker Studio en autonomie pour mesurer les performances et les conversions.',
     results: [
-      "+20% de conversion (contre 0 auparavant, car redirection vers la homepage)",
-      "Expérience utilisateur enrichie avec meilleure compréhension du produit",
-      "Potentiel gain de +450k €/an généré par les actions concrètes post-onboarding",
+      '+20% de conversion (contre 0 auparavant, car redirection vers la homepage)',
+      'Expérience utilisateur enrichie avec meilleure compréhension du produit',
+      'Potentiel gain de +450k €/an généré par les actions concrètes post-onboarding',
     ],
-    duration: "2 mois",
-    team: "Seul",
-    year: "2025",
-    structure: "papernest",
+    duration: '2 mois',
+    team: 'Seul',
+    year: '2025',
+    structure: 'papernest',
     gallery: [
       {
-        type: "image",
-        src: "/refonte-onboarding1.png",
-        caption: "Étape 1 : choix de la value proposition",
+        type: 'image',
+        src: '/refonte-onboarding1.png',
+        caption: 'Étape 1 : choix de la value proposition',
       },
       {
-        type: "image",
-        src: "/refonte-onboarding2.png",
-        caption: "Étape 2 : explication de la value proposition",
+        type: 'image',
+        src: '/refonte-onboarding2.png',
+        caption: 'Étape 2 : explication de la value proposition',
       },
       {
-        type: "image",
-        src: "/refonte-onboarding3.png",
+        type: 'image',
+        src: '/refonte-onboarding3.png',
         caption: "Étape 3 : customization de l'expérience",
       },
       {
-        type: "image",
-        src: "/refonte-onboarding4.png",
-        caption: "Étape 4 : récolte des informations personnelles",
+        type: 'image',
+        src: '/refonte-onboarding4.png',
+        caption: 'Étape 4 : récolte des informations personnelles',
       },
       {
-        type: "image",
-        src: "/refonte-onboarding5.png",
-        caption: "Étape 5 : guider vers une action concrète",
+        type: 'image',
+        src: '/refonte-onboarding5.png',
+        caption: 'Étape 5 : guider vers une action concrète',
       },
     ],
   },
   {
-    titre: "Collexion",
+    titre: 'Collexion',
     description:
-      "Création de designs de t-shirt, de sites web et de podcasts en collaboration avec un hôpital psychiatrique de jour.",
-    image: "/collexion-design.png",
+      'Création de designs de t-shirt, de sites web et de podcasts en collaboration avec un hôpital psychiatrique de jour.',
+    image: '/collexion-design.png',
     technologies: [
-      "Créativité",
-      "Gestion de Projet",
-      "Collaboration Externe",
-      "Développement Web",
-      "Interviews",
-      "Projet Caritatif",
+      'Créativité',
+      'Gestion de Projet',
+      'Collaboration Externe',
+      'Développement Web',
+      'Interviews',
+      'Projet Caritatif',
     ],
-    statut: "Terminé",
-    slug: "collexion",
+    statut: 'Terminé',
+    slug: 'collexion',
     overview:
-      "Projet transpromotion visant à déstigmatiser les troubles psychiatriques en créant des designs uniques pour t-shirts et sites web, en collaboration avec un hôpital psychiatrique de jour.",
+      'Projet transpromotion visant à déstigmatiser les troubles psychiatriques en créant des designs uniques pour t-shirts et sites web, en collaboration avec un hôpital psychiatrique de jour.',
     challenge:
-      "Allier créativité, technologie et impact social : concevoir un projet à la fois éducatif, caritatif et collaboratif, impliquant plusieurs étudiants et des patients, tout en respectant leur histoire et leur travail artistique.",
+      'Allier créativité, technologie et impact social : concevoir un projet à la fois éducatif, caritatif et collaboratif, impliquant plusieurs étudiants et des patients, tout en respectant leur histoire et leur travail artistique.',
     solution:
-      "Organisation d’ateliers d’art thérapeutique avec les patients du Mascaret à Mérignac. Collecte et retravail des œuvres pour créer des designs accompagnés de QR Codes renvoyant vers un site web personnalisé avec un podcast du patient. Impression sur vêtements de seconde main vendus au profit de l’hôpital. Coordination du projet avec 5 étudiants de deuxième année, intégrant design, développement web, gestion de projet et communication caritative.",
+      'Organisation d’ateliers d’art thérapeutique avec les patients du Mascaret à Mérignac. Collecte et retravail des œuvres pour créer des designs accompagnés de QR Codes renvoyant vers un site web personnalisé avec un podcast du patient. Impression sur vêtements de seconde main vendus au profit de l’hôpital. Coordination du projet avec 5 étudiants de deuxième année, intégrant design, développement web, gestion de projet et communication caritative.',
     results: [
-      "Création de designs personnalisés et sites web avec podcasts éducatifs pour chaque patient",
-      "Événements caritatifs et ventes réussies réinvesties dans l’hôpital de jour",
-      "Sensibilisation réussie du public aux troubles psychiatriques et renforcement de compétences multidisciplinaires",
-      "Apport d’une dynamique nouvelle grâce à la présence des jeunes porteurs du projet",
-      "Apprentissage mutuel : les étudiants ont développé des compétences techniques et sociales, tandis que le personnel a vu les patients dans un contexte différent et enrichissant",
+      'Création de designs personnalisés et sites web avec podcasts éducatifs pour chaque patient',
+      'Événements caritatifs et ventes réussies réinvesties dans l’hôpital de jour',
+      'Sensibilisation réussie du public aux troubles psychiatriques et renforcement de compétences multidisciplinaires',
+      'Apport d’une dynamique nouvelle grâce à la présence des jeunes porteurs du projet',
+      'Apprentissage mutuel : les étudiants ont développé des compétences techniques et sociales, tandis que le personnel a vu les patients dans un contexte différent et enrichissant',
     ],
-    duration: "6 mois",
-    team: "5 étudiants",
-    year: "2023",
-    structure: "ENSC",
+    duration: '6 mois',
+    team: '5 étudiants',
+    year: '2023',
+    structure: 'ENSC',
     gallery: [
       {
-        type: "image",
-        src: "/collexion1.jpg",
-        caption: "T-shirt design 1, afterwork caritatif",
+        type: 'image',
+        src: '/collexion1.jpg',
+        caption: 'T-shirt design 1, afterwork caritatif',
       },
       {
-        type: "image",
-        src: "/collexion2.png",
-        caption: "Site web 1, afterwork caritatif",
+        type: 'image',
+        src: '/collexion2.png',
+        caption: 'Site web 1, afterwork caritatif',
       },
       {
-        type: "image",
-        src: "/collexionn3.jpg",
-        caption: "Exposition oeuvres des patients, afterwork caritatif",
+        type: 'image',
+        src: '/collexionn3.jpg',
+        caption: 'Exposition oeuvres des patients, afterwork caritatif',
       },
       {
-        type: "image",
-        src: "/collexion4.jpg",
-        caption: "Fresque réalisée par les étudiants, afterwork caritatif",
+        type: 'image',
+        src: '/collexion4.jpg',
+        caption: 'Fresque réalisée par les étudiants, afterwork caritatif',
       },
       {
-        type: "image",
-        src: "/collexion5.png",
-        caption: "T-shirt design 2, fleur",
+        type: 'image',
+        src: '/collexion5.png',
+        caption: 'T-shirt design 2, fleur',
       },
       {
-        type: "image",
-        src: "/collexion6.png",
-        caption: "Site web 2, design fleur",
+        type: 'image',
+        src: '/collexion6.png',
+        caption: 'Site web 2, design fleur',
       },
       {
-        type: "image",
-        src: "/collexion7.png",
-        caption: "T-shirt design 3, geisha",
+        type: 'image',
+        src: '/collexion7.png',
+        caption: 'T-shirt design 3, geisha',
       },
       {
-        type: "image",
-        src: "/collexion8.png",
-        caption: "Site web 3, design geisha",
+        type: 'image',
+        src: '/collexion8.png',
+        caption: 'Site web 3, design geisha',
       },
       {
-        type: "image",
-        src: "/collexion9.jpg",
+        type: 'image',
+        src: '/collexion9.jpg',
         caption: "Tote bag offert aux patients de l'hôpital de jour",
       },
     ],
   },
   {
-    titre: "Cancellation Help",
+    titre: 'Cancellation Help',
     description:
       "J'ai conçu et développé un parcours complet de résiliation pour une trentaine de services, automatisé avec Make. Les données des utilisateurs (service choisi, satisfaction du tutoriel, points de friction) sont collectées dans Google Sheets pour mesurer l’impact et optimiser l’expérience utilisateur.",
-    image: "/cancellation-help-design.png",
+    image: '/cancellation-help-design.png',
     technologies: [
-      "Product Discovery",
-      "Product Building",
-      "Product Delivery",
-      "Make",
-      "Gsheets",
-      "Data Analysis",
+      'Product Discovery',
+      'Product Building',
+      'Product Delivery',
+      'Make',
+      'Gsheets',
+      'Data Analysis',
     ],
-    statut: "Terminé",
-    slug: "cancellation-help",
+    statut: 'Terminé',
+    slug: 'cancellation-help',
     overview:
-      "Création d’une expérience de résiliation multi-services chez Papernest afin de tester l’intérêt des utilisateurs pour la résiliation de contrats variés (Netflix, Basic-Fit, SNCF...).",
+      'Création d’une expérience de résiliation multi-services chez Papernest afin de tester l’intérêt des utilisateurs pour la résiliation de contrats variés (Netflix, Basic-Fit, SNCF...).',
     challenge:
-      "Déterminer l’intention des utilisateurs avec un minimum de moyens techniques et identifier les services additionnels les plus demandés, tout en offrant une expérience claire et fonctionnelle.",
+      'Déterminer l’intention des utilisateurs avec un minimum de moyens techniques et identifier les services additionnels les plus demandés, tout en offrant une expérience claire et fonctionnelle.',
     solution:
-      "Conception et développement d’un parcours complet de résiliation pour une trentaine de services, automatisé avec Make. Création de plus de 30 tutoriels d’aide à la réalisation et collecte des données utilisateurs (service choisi, satisfaction du tutoriel, points de friction) dans Google Sheets pour mesurer l’impact et optimiser l’expérience.",
+      'Conception et développement d’un parcours complet de résiliation pour une trentaine de services, automatisé avec Make. Création de plus de 30 tutoriels d’aide à la réalisation et collecte des données utilisateurs (service choisi, satisfaction du tutoriel, points de friction) dans Google Sheets pour mesurer l’impact et optimiser l’expérience.',
     results: [
-      "Les utilisateurs choisissent majoritairement les résiliations déjà proposées (énergie, box, mobile, assurance)",
-      "La plupart trouvent les tutoriels utiles et compréhensibles",
-      "Identification de nouveaux services attendus, avec la catégorie salle de sport comme la plus demandée",
+      'Les utilisateurs choisissent majoritairement les résiliations déjà proposées (énergie, box, mobile, assurance)',
+      'La plupart trouvent les tutoriels utiles et compréhensibles',
+      'Identification de nouveaux services attendus, avec la catégorie salle de sport comme la plus demandée',
     ],
-    duration: "1 mois",
-    team: "Seul",
-    year: "2025",
-    structure: "papernest",
+    duration: '1 mois',
+    team: 'Seul',
+    year: '2025',
+    structure: 'papernest',
     gallery: [
       {
-        type: "image",
-        src: "/cancellation-help1.png",
-        caption: "Résiliation déjà gérée, redirection vers le flow existant",
+        type: 'image',
+        src: '/cancellation-help1.png',
+        caption: 'Résiliation déjà gérée, redirection vers le flow existant',
       },
       {
-        type: "image",
-        src: "/cancellation-help2.png",
-        caption: "Résiliation non gérée et sans tutoriel disponible",
+        type: 'image',
+        src: '/cancellation-help2.png',
+        caption: 'Résiliation non gérée et sans tutoriel disponible',
       },
       {
-        type: "image",
-        src: "/cancellation-help3.png",
+        type: 'image',
+        src: '/cancellation-help3.png',
         caption: "Tutoriel d'aide à la résiliation",
       },
       {
-        type: "image",
-        src: "/cancellation-help4.png",
-        caption: "Récolte du feedback utilisateur",
+        type: 'image',
+        src: '/cancellation-help4.png',
+        caption: 'Récolte du feedback utilisateur',
       },
     ],
   },
   {
-    titre: "Réalité Augmentée Airbus",
+    titre: 'Réalité Augmentée Airbus',
     description:
       "En collaboration avec Airbus, j'ai développé un code Unity permettant de projeter une ombre en réalité augmentée pour faciliter la construction d'importantes pièces d'avion.",
-    image: "/airbus-design.png",
-    technologies: ["Unity", "UX Design", "Prototypage", "POC"],
-    statut: "Terminé",
-    slug: "realite-augmentee-airbus",
+    image: '/airbus-design.png',
+    technologies: ['Unity', 'UX Design', 'Prototypage', 'POC'],
+    statut: 'Terminé',
+    slug: 'realite-augmentee-airbus',
     overview:
-      "Projet de fin d’études réalisé en binôme avec Airbus, visant à améliorer les conditions de travail des ouvriers en usine grâce à la réalité augmentée. L’objectif : réduire la fatigue et le stress liés aux tâches de précision sur de grandes pièces d’avion en apportant une meilleure visibilité de la position des collègues.",
+      'Projet de fin d’études réalisé en binôme avec Airbus, visant à améliorer les conditions de travail des ouvriers en usine grâce à la réalité augmentée. L’objectif : réduire la fatigue et le stress liés aux tâches de précision sur de grandes pièces d’avion en apportant une meilleure visibilité de la position des collègues.',
 
     challenge:
-      "Lors de l’assemblage, les employés travaillent de part et d’autre d’éléments massifs sans pouvoir voir ce qu’il se passe de l’autre côté. Cela entraîne un manque de visibilité, des vérifications constantes, du stress et un risque d’erreur lorsque des actions critiques (comme le perçage) sont effectuées.",
+      'Lors de l’assemblage, les employés travaillent de part et d’autre d’éléments massifs sans pouvoir voir ce qu’il se passe de l’autre côté. Cela entraîne un manque de visibilité, des vérifications constantes, du stress et un risque d’erreur lorsque des actions critiques (comme le perçage) sont effectuées.',
 
     solution:
-      "Développement en Unity d’un Proof of Concept utilisant une caméra Zed2i pour détecter et projeter en réalité augmentée l’ombre ou la silhouette d’un collègue. Plusieurs modes d’affichage ont été conçus : couleurs évolutives (vert → orange → rouge selon la distance), gestion de l’opacité dynamique et paramétrage des seuils. Une interface de test a été créée pour ajuster ces paramètres et évaluer l’expérience utilisateur.",
+      'Développement en Unity d’un Proof of Concept utilisant une caméra Zed2i pour détecter et projeter en réalité augmentée l’ombre ou la silhouette d’un collègue. Plusieurs modes d’affichage ont été conçus : couleurs évolutives (vert → orange → rouge selon la distance), gestion de l’opacité dynamique et paramétrage des seuils. Une interface de test a été créée pour ajuster ces paramètres et évaluer l’expérience utilisateur.',
 
     results: [
-      "Exploration innovante de la réalité augmentée appliquée à l’industrie aéronautique",
-      "Mise en place d’une architecture technique robuste (Unity + caméra Zed2i)",
-      "Ouverture vers un potentiel partenariat entre l’école et Airbus",
+      'Exploration innovante de la réalité augmentée appliquée à l’industrie aéronautique',
+      'Mise en place d’une architecture technique robuste (Unity + caméra Zed2i)',
+      'Ouverture vers un potentiel partenariat entre l’école et Airbus',
     ],
-    duration: "4 mois",
-    team: "En binôme",
-    year: "2024",
-    structure: "ENSC",
+    duration: '4 mois',
+    team: 'En binôme',
+    year: '2024',
+    structure: 'ENSC',
     gallery: [
       {
-        type: "video",
-        src: "/airbuss1.mp4",
-        caption: "Vidéo de présentation du projet",
+        type: 'video',
+        src: '/airbuss1.mp4',
+        caption: 'Vidéo de présentation du projet',
       },
     ],
   },
   {
-    titre: "DailyUI",
+    titre: 'DailyUI',
     description:
       "Chaque jour, je rajoute un nouveau design d'interface utilisateur, jusqu'au 100ème jour.",
-    image: "/daily-ui-design.png",
-    technologies: ["Figma", "UX Design", "UI Design"],
-    statut: "En cours",
-    slug: "dailyui",
+    image: '/daily-ui-design.png',
+    technologies: ['Figma', 'UX Design', 'UI Design'],
+    statut: 'En cours',
+    slug: 'dailyui',
     overview:
-      "Un défi personnel de 100 jours pour améliorer mes compétences en design d’interface utilisateur. Chaque jour, je conçois un nouvel écran ou composant imposé par le challenge, ce qui m’amène à explorer de nouvelles idées et à progresser en UX comme en UI.",
+      'Un défi personnel de 100 jours pour améliorer mes compétences en design d’interface utilisateur. Chaque jour, je conçois un nouvel écran ou composant imposé par le challenge, ce qui m’amène à explorer de nouvelles idées et à progresser en UX comme en UI.',
     challenge:
-      "Maintenir une régularité quotidienne tout en trouvant l’inspiration et en garantissant une certaine créativité sur la durée.",
+      'Maintenir une régularité quotidienne tout en trouvant l’inspiration et en garantissant une certaine créativité sur la durée.',
     solution:
       "Recherche d’inspiration variée et expérimentation de combinaisons de couleurs issues du livre 'A Dictionary of Color Combinations' pour enrichir mes créations et développer mon sens esthétique.",
     results: [
-      "100+ écrans réalisés attendus, faisant preuve de régularité",
-      "Progression notable en régularité créative et en maîtrise de Figma",
-      "Objectif de plus de 100 designs au terme du challenge",
+      '100+ écrans réalisés attendus, faisant preuve de régularité',
+      'Progression notable en régularité créative et en maîtrise de Figma',
+      'Objectif de plus de 100 designs au terme du challenge',
     ],
-    duration: "100 jours",
-    team: "Seul",
-    year: "2025",
-    structure: "Personnel",
+    duration: '100 jours',
+    team: 'Seul',
+    year: '2025',
+    structure: 'Personnel',
     gallery: [
       {
-        type: "video",
-        src: "/dailyui1.mov",
-        caption: "Page de connexion",
+        type: 'video',
+        src: '/dailyui1.mov',
+        caption: 'Jour 1 : Page de connexion',
+      },
+      {
+        type: 'video',
+        src: '/dailyui2.mov',
+        caption: 'Jour 2 : Page de paiement carte bancaire',
       },
     ],
   },
   {
-    titre: "PlanIt",
+    titre: 'PlanIt',
     description:
       "J'ai créé une application mobile web afin de permettre aux étudiants de planifier leurs révisions et gérer leur temps efficacement.",
-    image: "/planit-design.png",
+    image: '/planit-design.png',
     technologies: [
-      "Développement web",
-      "React.js",
-      "Figma",
-      "Algorithmie",
-      "ASP.NET Core",
-      "MySQL",
+      'Développement web',
+      'React.js',
+      'Figma',
+      'Algorithmie',
+      'ASP.NET Core',
+      'MySQL',
     ],
-    statut: "Terminé",
-    slug: "planit",
+    statut: 'Terminé',
+    slug: 'planit',
     overview:
       "Développement d'une application mobile web, PlanIt, pour permettre aux étudiants de planifier leurs révisions et gérer efficacement leur temps grâce à un suivi automatisé de leurs tâches.",
     challenge:
-      "Créer une solution individuelle complète qui génère automatiquement un planning personnalisé en fonction des tâches et disponibilités, tout en permettant un suivi fiable de l’exécution sans auto-évaluation manuelle.",
+      'Créer une solution individuelle complète qui génère automatiquement un planning personnalisé en fonction des tâches et disponibilités, tout en permettant un suivi fiable de l’exécution sans auto-évaluation manuelle.',
     solution:
       "Conception et développement de l'application seul, en s’auto-formant à React.js. Mise en place d’un algorithme pour générer le planning et suivre automatiquement l’avancement des tâches. Développement back-end avec ASP.NET Core et base de données MySQL pour stocker les données de suivi.",
     results: [
-      "Application opérationnelle permettant la planification et le suivi automatisé des tâches",
-      "Expérience complète en développement web fullstack et auto-apprentissage de React.js",
-      "Renforcement des compétences en algorithmie et gestion de données",
+      'Application opérationnelle permettant la planification et le suivi automatisé des tâches',
+      'Expérience complète en développement web fullstack et auto-apprentissage de React.js',
+      'Renforcement des compétences en algorithmie et gestion de données',
     ],
-    duration: "4 mois",
-    team: "Seul",
-    year: "2024",
-    structure: "ENSC",
+    duration: '4 mois',
+    team: 'Seul',
+    year: '2024',
+    structure: 'ENSC',
     gallery: [
       {
-        type: "image",
-        src: "/planit1.png",
-        caption: "Page de connexion",
+        type: 'image',
+        src: '/planit1.png',
+        caption: 'Page de connexion',
       },
       {
-        type: "image",
-        src: "/planit2.png",
-        caption: "Page de création de planning",
+        type: 'image',
+        src: '/planit2.png',
+        caption: 'Page de création de planning',
       },
       {
-        type: "image",
-        src: "/planit3.png",
-        caption: "Page de réalisation du planning avec suivi",
+        type: 'image',
+        src: '/planit3.png',
+        caption: 'Page de réalisation du planning avec suivi',
       },
     ],
   },
-];
+]
 
 // ----------------------
 // PAGE COMPONENT
 // ----------------------
 type ProjectPageProps = {
-  params: { slug: string };
-};
+  params: { slug: string }
+}
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const projet = projets.find((p) => p.slug === params.slug);
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const projet = projets.find((p) => p.slug === params.slug)
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null)
 
   if (!projet) {
-    return notFound();
+    return notFound()
   }
 
-  const itemCount = projet.gallery?.length || 0;
-  const autresProjets = projets.filter((p) => p.slug !== projet.slug);
+  const itemCount = projet.gallery?.length || 0
+  const autresProjets = projets.filter((p) => p.slug !== projet.slug)
 
   return (
     <div className="min-h-screen bg-background">
@@ -349,7 +354,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             ← <span>Retour au portfolio</span>
           </Link>
           <Badge
-            variant={projet.statut === "Terminé" ? "default" : "secondary"}
+            variant={projet.statut === 'Terminé' ? 'default' : 'secondary'}
           >
             {projet.statut}
           </Badge>
@@ -392,7 +397,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             <div className="relative">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-muted to-muted/50 shadow-2xl">
                 <img
-                  src={projet.image || "/placeholder.svg?height=600&width=800"}
+                  src={projet.image || '/placeholder.svg?height=600&width=800'}
                   alt={projet.titre}
                   className="w-full h-full object-cover"
                 />
@@ -496,7 +501,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8">
-            Galerie ({itemCount} élément{itemCount > 1 ? "s" : ""})
+            Galerie ({itemCount} élément{itemCount > 1 ? 's' : ''})
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -507,7 +512,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 onClick={() => setSelectedIdx(idx)}
               >
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-muted border border-black/10 transition-all duration-300 group-hover:border-2 shadow-2xl">
-                  {item.type === "image" ? (
+                  {item.type === 'image' ? (
                     <img
                       src={item.src}
                       alt={item.caption || `Élément ${idx + 1}`}
@@ -579,7 +584,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </button>
 
             {/* Media */}
-            {projet.gallery[selectedIdx].type === "image" ? (
+            {projet.gallery[selectedIdx].type === 'image' ? (
               <img
                 src={projet.gallery[selectedIdx].src}
                 className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
@@ -623,7 +628,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   {p.image && (
                     <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg">
                       <img
-                        src={p.image || "/placeholder.svg"}
+                        src={p.image || '/placeholder.svg'}
                         alt={p.titre}
                         className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-300"
                       />
@@ -642,5 +647,5 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </section>
     </div>
-  );
+  )
 }
