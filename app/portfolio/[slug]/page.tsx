@@ -273,8 +273,8 @@ const projets = [
         caption: 'Jour 2 : Page de paiement carte bancaire',
       },
       {
-        type: 'image',
-        src: '/dailyui3.png',
+        type: 'video',
+        src: '/dailyui3.mov',
         caption: 'Jour 3 : Landing page café vert, Kava',
       },
     ],
